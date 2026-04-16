@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { BookOpen, Mail, Lock, AlertCircle } from 'lucide-react';
-import { useAuth } from '../hooks/useAuth';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { BookOpen, Mail, Lock, AlertCircle } from "lucide-react";
+import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
 
@@ -17,26 +17,26 @@ const Login = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    setError('');
+    setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     if (!formData.email || !formData.password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       setLoading(false);
       return;
     }
 
     const result = await login(formData.email, formData.password);
-    
+
     if (!result.success) {
       setError(result.message);
     }
-    
+
     setLoading(false);
   };
 
@@ -101,14 +101,17 @@ const Login = () => {
               disabled={loading}
               className="btn btn-primary w-full text-lg"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-primary-600 hover:text-primary-700">
+              Don't have an account?{" "}
+              <Link
+                to="/register"
+                className="font-medium text-primary-600 hover:text-primary-700"
+              >
                 Sign up
               </Link>
             </p>
@@ -116,7 +119,7 @@ const Login = () => {
         </div>
 
         <div className="mt-8 text-center text-sm text-gray-600">
-          <p>© 2025 Prepify. Exam preparation made easy.</p>
+          <p>© 2025 StudBud. Smart learning, better results.</p>
         </div>
       </div>
     </div>
